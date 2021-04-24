@@ -1,0 +1,44 @@
+﻿@{
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <h3>Cart Page</h3>
+    <table cellpadding="2" cellspacing="2" border="1">
+        <tr>
+            <th>Option</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Photo</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Sub Total</th>
+        </tr>
+        @foreach (var item in ViewBag.cart)
+        {
+            <tr>
+                <td class="d-lg-table-cell"><a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Remove</a> </td>
+                <td class="d-lg-table-cell">@item.Product.Id</td>
+                <td class="d-lg-table-cell">@item.Product.Name</td>
+                <td class="d-lg-table-cell"><img src="~/images/@item.Product.Photo" width="100" /> </td>
+                <td class="d-lg-table-cell">@item.Product.Price</td>
+                <td class="d-lg-table-cell">@item.Quantity</td>
+                <td class="d-lg-table-cell">@(item.Product.Price * item.Quantity )</td>
+            </tr>
+        }
+        <tr>
+            <td align="right" colspan="6">Sum</td>
+            <td>
+                @ViewBag.total
+            </td>
+        </tr>
+    </table>
+    <br />
+    <a asp-controller="product" asp-action="index">Continue Shopping</a>
+    <a asp-controller="checkout" asp-action="index" asp-route-id="">Go To Checkout</a>
+</body>
+</html>

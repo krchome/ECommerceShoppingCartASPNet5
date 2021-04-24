@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <h3>Products List</h3>
+    <table cellpadding="2" cellspacing="2" border="1">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Photo</th>
+            <th>Price</th>
+            <th>Buy</th>
+        </tr>
+        @foreach (var product in ViewBag.products)
+        {
+    <tr>
+        <td class="d-lg-table-cell">@product.Id</td>
+        <td class="d-lg-table-cell">@product.Name</td>
+        <td class="d-lg-table-cell"><img src="~/images/@product.Photo" width="100" /> </td>
+        <td class="d-lg-table-cell">@(Math.Round(product.Price, 2))</td>
+        <td class="d-lg-table-cell">
+            <a asp-controller="cart" asp-action="buy" asp-route-id="@product.Id"> <img src="~/images/BuyNow.jpg" width="100" /></a>
+        </td>
+    </tr>
+        }
+    </table>
+
+</body>
+</html>
